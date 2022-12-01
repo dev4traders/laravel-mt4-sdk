@@ -1,0 +1,71 @@
+{
+    "name": "dev4traders/laravel-mt4-sdk",
+    "description": "SDK to easily work with the MT4 API in Laravel apps",
+    "keywords": [
+        "dev4traders",
+        "laravel",
+        "mt4",
+        "laravel-mt4-sdk"
+    ],
+    "homepage": "https://github.com/dev4traders/laravel-mt4-sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mikhail",
+            "email": "mikha.dev@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^6.0|^7.5",
+        "illuminate/contracts": "^9.0",
+        "spatie/laravel-package-tools": "^1.13.0",
+        "dev4traders/mt4-sdk-php": "^1.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "D4T\\MT4Sdk\\": "src",
+            "D4T\\MT4Sdk\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "D4T\\MT4Sdk\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "D4T\\MT4Sdk\\MT4SdkServiceProvider"
+            ],
+            "aliases": {
+                "MT4Manager": "D4T\\MT4Sdk\\Facades\\MT4Manager"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
