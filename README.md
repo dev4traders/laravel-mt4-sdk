@@ -47,7 +47,7 @@ In your `.env` file you should add the entries from the config file mentioned ab
 
 ## Usage
 
-You can use the `dev4traders\Mt4Sdk\Facades\MT4Manager` facade to perform most operations.
+You can use the `D4T\MT4Sdk\Facades\MT4Manager` facade to perform most operations.
 
 ## Testing
 
