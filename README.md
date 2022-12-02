@@ -26,7 +26,7 @@ composer require dev4traders/laravel-mt4-sdk
 You must publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="mt4-sdk-config"
+php artisan vendor:publish --tag="mt4-sdk"
 ```
 
 This is the contents of the published config file:
