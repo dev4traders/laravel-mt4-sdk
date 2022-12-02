@@ -19,7 +19,7 @@ class MT4SdkServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/mt4-sdk.php.php', 'mt4-sdk');
+        $this->mergeConfigFrom(__DIR__.'/../config/mt4-sdk.php', 'mt4-sdk');
 
         $this->app->bind(Manager::class, function () {
             if (config('mt4-sdk.api_token') === null) {
