@@ -2,21 +2,26 @@
 
 namespace D4T\MT4Sdk;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use D4T\MT4Sdk\Manager;
+use Illuminate\Support\ServiceProvider;
 
-class MT4SdkServiceProvider extends PackageServiceProvider
+class MT4SdkServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+
+    public function boot()
     {
-        $package
-            ->name('laravel-mt4-sdk')
-            ->hasConfigFile();
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/mt4-sdk.php' => config_path('mt4-sdk.php'),
+            ], 'config');
+        }
     }
 
-    public function registeringPackage()
+    public function register()
     {
-        $this->app->bind(MT4Manager::class, function () {
+        $this->mergeConfigFrom(__DIR__.'/../config/mt4-sdk.php.php', 'mt4-sdk');
+
+        $this->app->bind(Manager::class, function () {
             if (config('mt4-sdk.api_token') === null) {
                 return null;
             }
@@ -25,10 +30,12 @@ class MT4SdkServiceProvider extends PackageServiceProvider
                 return null;
             }
 
-            return new MT4Manager(
+            return new Manager(
                 config('mt4-sdk.api_token'),
                 config('mt4-sdk.endpoint'),
             );
         });
+
     }
+
 }

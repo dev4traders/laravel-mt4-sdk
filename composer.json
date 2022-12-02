@@ -18,9 +18,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "guzzlehttp/guzzle": "^6.0|^7.5",
         "illuminate/contracts": "^9.0",
-        "spatie/laravel-package-tools": "^1.13.0",
         "dev4traders/mt4-sdk-php": "*"
     },
     "require-dev": {
@@ -34,8 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "D4T\\MT4Sdk\\": "src",
-            "D4T\\MT4Sdk\\Database\\Factories\\": "database/factories"
+            "D4T\\MT4Sdk\\": "src"
         }
     },
     "autoload-dev": {

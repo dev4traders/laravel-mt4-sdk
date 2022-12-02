@@ -19,7 +19,7 @@
     verbose="true"
 >
     <testsuites>
-        <testsuite name="Spatie Test Suite">
+        <testsuite name="Laravel MT4 Sdk Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
