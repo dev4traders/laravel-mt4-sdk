@@ -18,6 +18,24 @@ class MT4SdkTest extends Orchestra
         $this->assertTrue(MT4Manager::ping());
     }
 
+    /**
+     * @test
+     */
+    public function not_zero_list_account_logins()
+    {
+        $this->assertNotCount(0, MT4Manager::listAccountLogins());
+    }
+
+    /**
+     * @test
+     */
+    public function can_create_account()
+    {
+        /** @var D4T\MT4Sdk\Resources\Account $account */
+        $account = MT4Manager::createAccount(['name' => 'TestL', 'email' => 'testl@test.com', 'group' => 'demoHFX-USD']);
+        $this->assertEquals('TestL', $account->name);
+    }
+
     public function setUp(): void
     {
         parent::setUp();
