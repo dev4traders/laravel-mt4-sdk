@@ -1,18 +1,39 @@
 <?php
 
-namespace Tests;
+namespace D4T\MT4Sdk\Tests;
 
-use Mockery;
-use PHPUnit\Framework\TestCase;
-use Tests\CreatesApplication;
+use D4T\MT4Sdk\Facades\MT4Manager;
+use D4T\MT4Sdk\MT4SdkServiceProvider;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Orchestra\Testbench\TestCase as Orchestra;
 
-class MT4SDKTest extends TestCase
+class MT4SdkTest extends Orchestra
 {
-    use CreatesApplication;
 
-    protected function tearDown(): void
+    /**
+     * @test
+     */
+    public function can_ping()
     {
-        Mockery::close();
+        $this->assertTrue(MT4Manager::ping());
     }
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        MT4Manager::setTimeout(3);
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        $app->useEnvironmentPath(__DIR__ . '/..');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            MT4SdkServiceProvider::class,
+        ];
+    }
 }
