@@ -3,6 +3,7 @@
 namespace D4T\MT4Sdk;
 
 use D4T\MT4Sdk\Manager;
+use D4T\MT4Sdk\Terminal;
 use Illuminate\Support\ServiceProvider;
 
 class MT4SdkServiceProvider extends ServiceProvider
@@ -22,20 +23,34 @@ class MT4SdkServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/mt4-sdk.php', 'mt4-sdk');
 
         $this->app->bind(Manager::class, function () {
-            if (config('mt4-sdk.api_token') === null) {
+            if (config('mt4-sdk.manager.api_token') === null) {
                 return null;
             }
 
-            if (config('mt4-sdk.endpoint') === null) {
+            if (config('mt4-sdk.manager.endpoint') === null) {
                 return null;
             }
 
             return new Manager(
-                config('mt4-sdk.api_token'),
-                config('mt4-sdk.endpoint'),
+                config('mt4-sdk.manager.api_token'),
+                config('mt4-sdk.manager.endpoint'),
+            );
+        });
+
+        $this->app->bind(Terminal::class, function () {
+            if (config('mt4-sdk.terminal.api_token') === null) {
+                return null;
+            }
+
+            if (config('mt4-sdk.terminal.endpoint') === null) {
+                return null;
+            }
+
+            return new Terminal(
+                config('mt4-sdk.terminal.api_token'),
+                config('mt4-sdk.terminal.endpoint'),
             );
         });
 
     }
-
 }
